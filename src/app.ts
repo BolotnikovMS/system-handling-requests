@@ -1,17 +1,16 @@
-import express, { Application, NextFunction, Request, Response } from 'express'
-import router from './routes'
+import express, { Application } from 'express'
+import "reflect-metadata"
+import { DataBaseConnect } from './config/database'
+import appealsRouter from './routes/appeals.route'
 
-const app: Application = express()
-const PORT = process.env.PORT || 6000
+DataBaseConnect.initialize()
+	.then(async() => {
+		const app: Application = express()
+		const PORT = process.env.PORT || 6000
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(router)
+		app.use(express.json())
+		app.use('/api/v1/', [appealsRouter])
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack)
-
-  res.status(500).send('Something broke!')
-})
-
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+		app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+  })
+  .catch((error: Error) => {console.log(error)})
