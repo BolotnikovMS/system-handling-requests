@@ -1,7 +1,9 @@
 # Dependencies and AdonisJS build
 node_modules
 build
-tmp
+tmp/
+temp/
+db/
 
 # Secrets
 .env
@@ -10,3 +12,5 @@ tmp
 .DS_Store
 public
 public/
+.idea/
+.vscode/
