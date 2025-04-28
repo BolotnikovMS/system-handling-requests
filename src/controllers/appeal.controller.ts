@@ -25,7 +25,7 @@ export class AppealsController {
 	static async changeStatusAppeal(req: Request, res: Response) {
 		try {
 			const { id } = req.params
-			let data
+			let data: unknown
 
 			if (req.path.includes('/take-work')) {
 				data = await appealRepository.changeStatus(+id)
