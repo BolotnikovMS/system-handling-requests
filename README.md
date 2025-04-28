@@ -39,16 +39,16 @@ src/
 
 1. Склонируйте репозиторий:
 ```bash
-	git clone https://github.com/BolotnikovMS/system-handling-requests.git
+git clone https://github.com/BolotnikovMS/system-handling-requests.git
 ```
 2. Установите зависимости:
 ```bash
-	npm install
+npm install
 ```
 
 3. Запустите приложение:
 ```bash
-	npm run dev
+npm run dev
 ```
 Приложение будет запущенно по адресу:
 
