@@ -91,7 +91,7 @@ id - необходимо подставить
 Тело запроса:
 ```bash
 {
-	"result": "Close"
+"result": "Close"
 }
 ```
 
@@ -106,7 +106,7 @@ id - необходимо подставить
 Тело запроса:
 ```bash
 {
-	"cancellationMessage": "Cancel message"
+"cancellationMessage": "Cancel message"
 }
 ```
 
