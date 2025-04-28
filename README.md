@@ -68,8 +68,8 @@ http://localhost:6000/api/v1/appeals
 Тело запроса:
 ```bash
 {
-	"title": "Title",
-	"description": "Description"
+"title": "Title",
+"description": "Description"
 }
 ```
 
