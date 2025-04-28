@@ -1,5 +1,4 @@
-import moment from 'moment'
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('appeals')
 export class Appeal extends BaseEntity {
@@ -8,7 +7,7 @@ export class Appeal extends BaseEntity {
 
   @Column({
   	type: 'varchar',
-   	length: 50,
+  	length: 50,
   	default: 'Новое',
   })
   status!: string
@@ -39,29 +38,8 @@ export class Appeal extends BaseEntity {
 	})
 	cancellationMessage!: string
 
-  @CreateDateColumn({
-		type: 'date',
-		transformer: {
-			to(value: Date) {
-				return moment(value).format('DD.MM.YYYY HH:mm')
-			},
-			from(value: Date) {
-				return value
-			}
-		}
+  @Column({
+		type: 'varchar'
 	})
-	createdAt!: Date
-
-	@UpdateDateColumn({
-		type: 'date',
-		transformer: {
-			to(value: Date) {
-				return value
-			},
-			from(value: Date) {
-				return moment(value).format('DD.MM.YYYY HH:mm')
-			}
-		}
-	})
-  updatedAt!: Date
+	createdAt!: string
 }
