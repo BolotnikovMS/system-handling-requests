@@ -1,5 +1,6 @@
 import { Request } from "express"
-import { Repository } from "typeorm"
+import moment from "moment"
+import { Between, Like, Repository } from "typeorm"
 import { Appeal } from "../entity/appeal.entity"
 import { ICancelAppeal, ICloseAppeal, INewAppeal } from "../interfaces/appeal.interfaces"
 
@@ -8,10 +9,21 @@ export class AppealService {
 
 	async getAppeals(req: Request): Promise<Appeal[]> {
 		const { date, dateStart, dateEnd } = req.query
-		// console.log('Date', date)
-		// console.log('DateStart', dateStart)
-		// console.log('DateEnd', dateEnd)
-		const appeals = await this.appealRepository.find()
+		let appeals
+
+		if (dateStart && dateEnd) {
+			appeals = await this.appealRepository.findBy({
+				createdAt: Between(dateStart.toString(), dateEnd.toString())
+			})
+		} else if (date) {
+			appeals = await this.appealRepository.find({
+				where: {
+					createdAt: Like(`%${date}%`)
+				}
+			})
+		} else {
+			appeals = await this.appealRepository.find()
+		}
 
 		return appeals
 	}
@@ -27,7 +39,7 @@ export class AppealService {
 	}
 
 	async createAppeal(newAppeal: INewAppeal): Promise<Appeal> {
-		const appeal = this.appealRepository.create(newAppeal)
+		const appeal = this.appealRepository.create({...newAppeal, createdAt: moment(new Date()).format('DD.MM.YYYY')})
 
 		await this.appealRepository.save(appeal)
 
